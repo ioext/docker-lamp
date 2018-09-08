@@ -73,8 +73,6 @@ VOLUME /var/log/mysql
 VOLUME /etc/apache2
 
 RUN chown -R www-data:www-data /var/www/html
-RUN chmod 777 -R /var/www/html/public/bootstrap/cache
-RUN chmod 777 /var/www/html/public/storage
 
 EXPOSE 80
 EXPOSE 3306
