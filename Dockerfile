@@ -9,6 +9,7 @@ COPY source.china.list /tmp/
 RUN if [ "$SOURCE" = "CHINA" ] ; then sh -c "cp /tmp/source.china.list /etc/apt/sources.list" ; fi
 RUN apt-get update
 RUN apt-get upgrade -y
+RUN apt install -y apt-utils
 
 COPY debconf.selections /tmp/
 RUN debconf-set-selections /tmp/debconf.selections
