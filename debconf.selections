@@ -1,2 +1,3 @@
+debconf debconf/frontend select Noninteractive
 postfix postfix/mailname string localhost
 postfix postfix/main_mailer_type string 'Docker Postfix'
