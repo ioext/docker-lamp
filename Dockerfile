@@ -62,11 +62,12 @@ ENV DATE_TIMEZONE UTC
 ENV TERM dumb
 
 COPY run-lamp.sh /usr/sbin/
+COPY change-root.sh /tmp/
 
 RUN a2enmod rewrite
 #RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN chmod +x /usr/sbin/run-lamp.sh
-
+RUN chmod +x /tmp/change-root.sh
 
 VOLUME /var/www/html
 VOLUME /var/log/httpd
@@ -79,5 +80,5 @@ RUN chown -R www-data:www-data /var/www/html
 EXPOSE 80
 EXPOSE 3306
 
-RUN "./change-root.sh"
+RUN "/tmp/change-root.sh"
 CMD ["/usr/sbin/run-lamp.sh"]
