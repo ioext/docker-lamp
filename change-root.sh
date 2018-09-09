@@ -11,6 +11,9 @@ replace_string () {
         esac
         shift
     done
+    echo $replace;
+    echo $with;
+    echo $file;
     sed -i -e "s%$replace%$with%ig" $file
 }
 
@@ -23,3 +26,4 @@ replace_string    file='/etc/apache2/sites-enabled/000-default.conf' \
 #               replace='.*DocumentRoot.*' \
 #                  with='DocumentRoot "path-to-your-document-root"'
 
+echo 'root changed';
