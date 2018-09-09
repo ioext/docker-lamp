@@ -65,6 +65,7 @@ COPY run-lamp.sh /usr/sbin/
 COPY change-root.sh /tmp/
 
 RUN a2enmod rewrite
+RUN a2enmod headers
 #RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN chmod +x /usr/sbin/run-lamp.sh
 RUN chmod +x /tmp/change-root.sh
@@ -80,5 +81,5 @@ RUN chown -R www-data:www-data /var/www/html
 EXPOSE 80
 EXPOSE 3306
 
-RUN "/tmp/change-root.sh"
+RUN ./tmp/change-root.sh
 CMD ["/usr/sbin/run-lamp.sh"]
