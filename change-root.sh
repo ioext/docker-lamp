@@ -12,7 +12,7 @@ replace_string () {
         shift
     done
 
-    sudo sed -i -- "s/$replace/$with/ig" $file
+    sed -i -- "s/$replace/$with/ig" $file
 }
 
 replace_string    file='/etc/apache2/sites-enabled/000-default.conf' \
