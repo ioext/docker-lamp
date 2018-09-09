@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER Fer Uria <fauria@gmail.com>
 LABEL Description="Cutting-edge LAMP stack, based on Ubuntu 16.04 LTS. Includes .htaccess support and popular PHP7 features, including composer and mail() function." \
 	License="Apache License 2.0" \
@@ -15,39 +15,39 @@ RUN debconf-set-selections /tmp/debconf.selections
 
 RUN apt-get install -y zip unzip
 RUN apt-get install -y \
-	php7.0 \
-	php7.0-bz2 \
-	php7.0-cgi \
-	php7.0-cli \
-	php7.0-common \
-	php7.0-curl \
-	php7.0-dev \
-	php7.0-enchant \
-	php7.0-fpm \
-	php7.0-gd \
-	php7.0-gmp \
-	php7.0-imap \
-	php7.0-interbase \
-	php7.0-intl \
-	php7.0-json \
-	php7.0-ldap \
-	php7.0-mbstring \
-	php7.0-mcrypt \
-	php7.0-mysql \
-	php7.0-odbc \
-	php7.0-opcache \
-	php7.0-pgsql \
-	php7.0-phpdbg \
-	php7.0-pspell \
-	php7.0-readline \
-	php7.0-recode \
-	php7.0-snmp \
-	php7.0-sqlite3 \
-	php7.0-sybase \
-	php7.0-tidy \
-	php7.0-xmlrpc \
-	php7.0-xsl \
-	php7.0-zip
+	php7.2 \
+	php7.2-bz2 \
+	php7.2-cgi \
+	php7.2-cli \
+	php7.2-common \
+	php7.2-curl \
+	php7.2-dev \
+	php7.2-enchant \
+	php7.2-fpm \
+	php7.2-gd \
+	php7.2-gmp \
+	php7.2-imap \
+	php7.2-interbase \
+	php7.2-intl \
+	php7.2-json \
+	php7.2-ldap \
+	php7.2-mbstring \
+	php7.2-mcrypt \
+	php7.2-mysql \
+	php7.2-odbc \
+	php7.2-opcache \
+	php7.2-pgsql \
+	php7.2-phpdbg \
+	php7.2-pspell \
+	php7.2-readline \
+	php7.2-recode \
+	php7.2-snmp \
+	php7.2-sqlite3 \
+	php7.2-sybase \
+	php7.2-tidy \
+	php7.2-xmlrpc \
+	php7.2-xsl \
+	php7.2-zip
 RUN apt-get install apache2 libapache2-mod-php7.0 -y
 RUN apt-get install mariadb-common mariadb-server mariadb-client -y
 RUN apt-get install postfix -y
