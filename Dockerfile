@@ -74,6 +74,7 @@ VOLUME /var/www/html
 VOLUME /var/log/httpd
 VOLUME /var/lib/mysql
 VOLUME /var/log/mysql
+RUN /tmp/change-root.sh
 VOLUME /etc/apache2
 
 RUN chown -R www-data:www-data /var/www/html
@@ -81,5 +82,5 @@ RUN chown -R www-data:www-data /var/www/html
 EXPOSE 80
 EXPOSE 3306
 
-RUN /tmp/change-root.sh
+
 CMD ["/usr/sbin/run-lamp.sh"]
