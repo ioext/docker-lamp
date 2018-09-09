@@ -23,5 +23,3 @@ replace_string    file='/etc/apache2/sites-enabled/000-default.conf' \
 #               replace='.*DocumentRoot.*' \
 #                  with='DocumentRoot "path-to-your-document-root"'
 
-service apache2 reload
-
