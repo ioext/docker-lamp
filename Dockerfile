@@ -9,7 +9,9 @@ COPY source.china.list /tmp/
 RUN if [ "$SOURCE" = "CHINA" ] ; then sh -c "cp /tmp/source.china.list /etc/apt/sources.list" ; fi
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt install -y apt-utils
+RUN apt install -y apt-utils curl
+RUN curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+RUN apt-get install nodejs -y
 
 COPY debconf.selections /tmp/
 RUN debconf-set-selections /tmp/debconf.selections
