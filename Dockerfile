@@ -11,7 +11,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt install -y apt-utils curl
 RUN curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
-RUN apt-get install nodejs -y
+RUN apt-get install nodejs iputils-ping -y
 
 COPY debconf.selections /tmp/
 RUN debconf-set-selections /tmp/debconf.selections
