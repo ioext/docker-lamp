@@ -98,6 +98,7 @@ RUN chown -R www-data:www-data /var/www/html
 EXPOSE 80
 EXPOSE 3306
 
+RUN service cron restart
 RUN cron
 
 CMD ["/usr/sbin/run-lamp.sh"]
