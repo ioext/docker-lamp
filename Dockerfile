@@ -9,9 +9,18 @@ COPY source.china.list /tmp/
 RUN if [ "$SOURCE" = "CHINA" ] ; then sh -c "cp /tmp/source.china.list /etc/apt/sources.list" ; fi
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt install -y apt-utils curl gnupg2
+RUN apt install -y apt-utils curl locales cron  gnupg2
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN apt-get install nodejs iputils-ping -y
+
+RUN locale-gen en_US.UTF-8
+
+ENV LANGUAGE=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+ENV LC_CTYPE=UTF-8
+ENV LANG=en_US.UTF-8
+ENV TERM xterm
+
 
 COPY debconf.selections /tmp/
 RUN debconf-set-selections /tmp/debconf.selections
@@ -66,6 +75,11 @@ ENV TERM dumb
 COPY run-lamp.sh /usr/sbin/
 COPY change-root.sh /tmp/
 
+ADD crontab /etc/cron.d/laravel-cron
+RUN chmod 0644 /etc/cron.d/laravel-cron
+RUN crontab /etc/cron.d/laravel-cron
+RUN touch /var/log/cron.log
+
 RUN a2enmod rewrite
 RUN a2enmod headers
 #RUN ln -s /usr/bin/nodejs /usr/bin/node
@@ -84,5 +98,6 @@ RUN chown -R www-data:www-data /var/www/html
 EXPOSE 80
 EXPOSE 3306
 
+RUN cron
 
 CMD ["/usr/sbin/run-lamp.sh"]
