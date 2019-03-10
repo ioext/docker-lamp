@@ -9,7 +9,7 @@ COPY source.china.list /tmp/
 RUN if [ "$SOURCE" = "CHINA" ] ; then sh -c "cp /tmp/source.china.list /etc/apt/sources.list" ; fi
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt install -y apt-utils curl locales cron
+RUN apt install -y apt-utils curl locales cron  gnupg2
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN apt-get install nodejs iputils-ping -y
 
