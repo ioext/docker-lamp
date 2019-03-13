@@ -98,8 +98,8 @@ RUN /tmp/change-root.sh
 VOLUME /etc/apache2
 
 RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 777 /var/www/html/storage
-RUN chmod -R 777 /var/www/html/boostrap/cache
+#RUN chmod -R 777 /var/www/html/storage
+#RUN chmod -R 777 /var/www/html/boostrap/cache
 
 
 EXPOSE 80
