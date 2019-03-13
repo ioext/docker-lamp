@@ -80,6 +80,9 @@ RUN chmod 0644 /etc/cron.d/laravel-cron
 RUN crontab /etc/cron.d/laravel-cron
 RUN touch /var/log/cron.log
 
+ADD crontab /etc/cron.d/laravel-cron
+ADD supvervisord-queue-work.conf /etc/supervisor/conf.d/supvervisord-queue-work.conf
+
 RUN a2enmod rewrite
 RUN a2enmod headers
 #RUN ln -s /usr/bin/nodejs /usr/bin/node
@@ -94,6 +97,8 @@ RUN /tmp/change-root.sh
 VOLUME /etc/apache2
 
 RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 777 /var/www/html/storage
+
 
 EXPOSE 80
 EXPOSE 3306
