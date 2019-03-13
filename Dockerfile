@@ -81,8 +81,9 @@ RUN chmod 0644 /etc/cron.d/laravel-cron
 RUN crontab /etc/cron.d/laravel-cron
 RUN touch /var/log/cron.log
 
+RUN mkdir /var/log/supervisord
 ADD crontab /etc/cron.d/laravel-cron
-ADD supvervisord-queue-work.conf /etc/supervisor/conf.d/supvervisord-queue-work.conf
+ADD supervisord-queue-work.conf /etc/supervisor/conf.d/supervisord-queue-work.conf
 
 RUN a2enmod rewrite
 RUN a2enmod headers
