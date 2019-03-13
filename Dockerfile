@@ -20,6 +20,7 @@ ENV LC_ALL=en_US.UTF-8
 ENV LC_CTYPE=UTF-8
 ENV LANG=en_US.UTF-8
 ENV TERM xterm
+# todo ENV APACHE_USER
 
 
 COPY debconf.selections /tmp/
@@ -98,6 +99,7 @@ VOLUME /etc/apache2
 
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 777 /var/www/html/storage
+RUN chmod -R 777 /var/www/html/boostrap/cache
 
 
 EXPOSE 80
