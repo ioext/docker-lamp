@@ -21,9 +21,9 @@ replace_string    file='/etc/apache2/sites-enabled/000-default.conf' \
                replace='.*DocumentRoot.*' \
                   with='DocumentRoot /var/www/html/public'
 
-replace_string    file='/etc/apache2/sites-enabled/default_ssl.conf' \
-               replace='.*DocumentRoot.*' \
-                  with='DocumentRoot /var/www/html/public'
+#replace_string    file='/etc/apache2/sites-enabled/default-ssl.conf' \
+#               replace='.*DocumentRoot.*' \
+#                  with='DocumentRoot /var/www/html/public'
 
 
 #replace_string    file='/etc/apache2/apache2.conf' \
