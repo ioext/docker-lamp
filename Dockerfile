@@ -88,6 +88,7 @@ ADD supervisord-queue-work.conf /etc/supervisor/conf.d/supervisord-queue-work.co
 
 RUN a2enmod rewrite
 RUN a2enmod headers
+RUN a2enmod ssl
 RUN a2ensite default-ssl
 #RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN chmod +x /usr/sbin/run-lamp.sh
