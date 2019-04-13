@@ -71,6 +71,9 @@ ENV TERM dumb
 
 COPY run-lamp.sh /usr/sbin/
 COPY change-root.sh /tmp/
+COPY ssl.conf /etc/apache2/site-available/default_ssl.conf
+COPY ssl_keys/server.crt /var/www/ssl/server.crt
+COPY ssl_keys/server.key /var/www/ssl/server.key
 
 ADD crontab /etc/cron.d/laravel-cron
 RUN chmod 0644 /etc/cron.d/laravel-cron
@@ -91,6 +94,7 @@ VOLUME /var/www/html
 VOLUME /var/log/httpd
 VOLUME /var/lib/mysql
 VOLUME /var/log/mysql
+VOLUME /var/www/ssl
 RUN /tmp/change-root.sh
 VOLUME /etc/apache2
 
