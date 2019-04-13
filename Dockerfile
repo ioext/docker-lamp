@@ -69,9 +69,11 @@ ENV ALLOW_OVERRIDE All
 ENV DATE_TIMEZONE UTC
 ENV TERM dumb
 
+RUN mkdir /var/www/ssl
+
 COPY run-lamp.sh /usr/sbin/
 COPY change-root.sh /tmp/
-COPY ssl.conf /etc/apache2/site-available/default_ssl.conf
+COPY ssl.conf /etc/apache2/sites-available/default-ssl.conf
 COPY ssl_keys/server.crt /var/www/ssl/server.crt
 COPY ssl_keys/server.key /var/www/ssl/server.key
 
@@ -86,6 +88,7 @@ ADD supervisord-queue-work.conf /etc/supervisor/conf.d/supervisord-queue-work.co
 
 RUN a2enmod rewrite
 RUN a2enmod headers
+RUN a2ensite default-ssl
 #RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN chmod +x /usr/sbin/run-lamp.sh
 RUN chmod +x /tmp/change-root.sh
