@@ -20,6 +20,7 @@ ENV TERM xterm
 
 
 COPY debconf.selections /tmp/
+
 RUN debconf-set-selections /tmp/debconf.selections
 
 RUN apt-get install -y zip unzip
@@ -61,6 +62,8 @@ RUN apt-get install mariadb-common mariadb-server mariadb-client -y
 RUN apt-get install postfix -y
 RUN apt-get install git composer nano tree vim curl ftp supervisor -y
 RUN npm install -g bower grunt-cli gulp
+
+COPY swoole_loader72.so /usr/lib/php/
 
 ENV LOG_STDOUT **Boolean**
 ENV LOG_STDERR **Boolean**
