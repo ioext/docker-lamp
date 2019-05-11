@@ -110,6 +110,8 @@ VOLUME /var/lib/mysql
 VOLUME /var/log/mysql
 VOLUME /var/www/ssl
 RUN /tmp/change-root.sh
+RUN echo swoole_license_files=/var/www/html/license_file >> /etc/php/7.2/apache2/php.ini
+RUN echo swoole_license_files=/var/www/html/license_file >> /etc/php/7.2/cli/php.ini
 VOLUME /etc/apache2
 
 RUN chown -R www-data:www-data /var/www/html
