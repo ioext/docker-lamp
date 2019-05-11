@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-MAINTAINER Fer Uria <fauria@gmail.com>
+MAINTAINER Ayaka209 <ayaworking@gmail.com>
 ARG SOURCE=GLOBAL
 COPY source.china.list /tmp/
 RUN if [ "$SOURCE" = "CHINA" ] ; then sh -c "cp /tmp/source.china.list /etc/apt/sources.list" ; fi
@@ -20,6 +20,7 @@ ENV TERM xterm
 
 
 COPY debconf.selections /tmp/
+
 RUN debconf-set-selections /tmp/debconf.selections
 
 RUN apt-get install -y zip unzip
@@ -62,6 +63,8 @@ RUN apt-get install postfix -y
 RUN apt-get install git composer nano tree vim curl ftp supervisor -y
 RUN npm install -g bower grunt-cli gulp
 
+COPY swoole_loader72.so /usr/lib/php/
+
 ENV LOG_STDOUT **Boolean**
 ENV LOG_STDERR **Boolean**
 ENV LOG_LEVEL warn
@@ -76,6 +79,13 @@ COPY change-root.sh /tmp/
 COPY ssl.conf /etc/apache2/sites-available/default-ssl.conf
 COPY ssl_keys/server.crt /var/www/ssl/server.crt
 COPY ssl_keys/server.key /var/www/ssl/server.key
+
+
+# copy swoole_compiler
+COPY swoole_loader72.so /tmp/
+RUN cp /tmp/swoole_loader72.so $(php -r 'echo ini_get("extension_dir");')
+RUN echo "extension=swoole_loader72.so" > /etc/php/7.2/mods-available/swoole_loader72.ini
+RUN phpenmod swoole_loader72
 
 ADD crontab /etc/cron.d/laravel-cron
 RUN chmod 0644 /etc/cron.d/laravel-cron
@@ -100,11 +110,15 @@ VOLUME /var/lib/mysql
 VOLUME /var/log/mysql
 VOLUME /var/www/ssl
 RUN /tmp/change-root.sh
+RUN echo swoole_license_files=/var/www/html/license_file >> /etc/php/7.2/apache2/php.ini
+RUN echo swoole_license_files=/var/www/html/license_file >> /etc/php/7.2/cli/php.ini
 VOLUME /etc/apache2
 
 RUN chown -R www-data:www-data /var/www/html
 #RUN chmod -R 777 /var/www/html/storage
 #RUN chmod -R 777 /var/www/html/boostrap/cache
+
+COPY docker-php-ext-* /usr/local/bin/
 
 
 EXPOSE 80
