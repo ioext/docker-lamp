@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-MAINTAINER Fer Uria <fauria@gmail.com>
+MAINTAINER Ayaka209 <ayaworking@gmail.com>
 ARG SOURCE=GLOBAL
 COPY source.china.list /tmp/
 RUN if [ "$SOURCE" = "CHINA" ] ; then sh -c "cp /tmp/source.china.list /etc/apt/sources.list" ; fi
@@ -79,6 +79,13 @@ COPY change-root.sh /tmp/
 COPY ssl.conf /etc/apache2/sites-available/default-ssl.conf
 COPY ssl_keys/server.crt /var/www/ssl/server.crt
 COPY ssl_keys/server.key /var/www/ssl/server.key
+
+
+# copy swoole_compiler
+COPY swoole_loader72.so /tmp/
+RUN cp /tmp/swoole_loader72.so $(php -r 'echo ini_get("extension_dir");')
+RUN echo "extension=swoole_loader72.so" > /etc/php/7.2/mods-available/swoole_loader72.ini
+RUN phpenmod swoole_loader72
 
 ADD crontab /etc/cron.d/laravel-cron
 RUN chmod 0644 /etc/cron.d/laravel-cron
