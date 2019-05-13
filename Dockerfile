@@ -58,7 +58,7 @@ RUN apt-get install -y \
 	php7.2-xsl \
 	php7.2-zip
 RUN apt-get install apache2 libapache2-mod-php7.2 -y
-RUN apt-get install mariadb-common python3-pip mariadb-client -y
+RUN apt-get install mariadb-common mariadb-server python3-pip mariadb-client -y
 RUN apt-get install postfix -y
 RUN apt-get install git composer nano tree vim curl ftp supervisor -y
 RUN npm install -g bower grunt-cli gulp
