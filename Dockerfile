@@ -84,7 +84,7 @@ COPY ssl_keys/server.key /var/www/ssl/server.key
 # copy swoole_compiler
 COPY ioncube_loader_lin_7.2.so /tmp/
 RUN cp /tmp/ioncube_loader_lin_7.2.so $(php -r 'echo ini_get("extension_dir");')
-RUN echo "extension=ioncube_loader_lin_7.2.so" > /etc/php/7.2/mods-available/ioncube.ini
+RUN echo "zend_extension=ioncube_loader_lin_7.2.so" > /etc/php/7.2/mods-available/ioncube.ini
 RUN phpenmod ioncube
 
 ADD crontab /etc/cron.d/laravel-cron
